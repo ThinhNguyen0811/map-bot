@@ -1,0 +1,24 @@
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Copy MCP server first
+COPY mcp-server/package.json /app/mcp-server/
+WORKDIR /app/mcp-server
+RUN npm install
+COPY mcp-server/src /app/mcp-server/src
+
+# Copy backend
+WORKDIR /app/backend
+COPY backend/package.json ./
+RUN npm install
+COPY backend/src ./src
+
+# Set working directory to backend
+WORKDIR /app/backend
+
+# Expose port
+EXPOSE 3001
+
+# Start the server
+CMD ["node", "src/server.js"]

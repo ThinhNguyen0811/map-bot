@@ -1,0 +1,21 @@
+{
+  "name": "map-bot",
+  "version": "1.0.0",
+  "description": "A chatbot for Google Maps using MCP, LangChain JS, React, and Mistral",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "frontend",
+    "mcp-server"
+  ],
+  "scripts": {
+    "install:all": "npm install && cd backend && npm install && cd ../frontend && npm install && cd ../mcp-server && npm install",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:mcp": "cd mcp-server && npm run dev",
+    "dev": "concurrently \"npm run dev:mcp\" \"npm run dev:backend\" \"npm run dev:frontend\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
